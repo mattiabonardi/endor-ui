@@ -25,4 +25,5 @@ export type SchemaValueType =
 export enum FieldShapes {
   TEXTFIELD,
   CHECKBOX,
+  OBJECT
 }

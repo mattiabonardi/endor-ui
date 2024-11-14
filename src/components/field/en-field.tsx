@@ -11,6 +11,7 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
         if (isString(props.value)) {
           return (
             <EndorTextfield
+              schema={props.schema}
               value={props.value}
               onChange={(v) => {
                 props.onChange(v);
@@ -27,6 +28,7 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
         if (isBoolean(props.value)) {
           return (
             <EndorCheckbox
+              schema={props.schema}
               value={props.value}
               onChange={(v) => {
                 props.onChange(v);

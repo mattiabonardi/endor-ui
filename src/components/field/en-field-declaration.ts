@@ -11,5 +11,5 @@ export interface EndorFieldProps extends AbstractEndorFieldProps {
 
 export type AbstractEndorFieldProps = {
   // schema
-  schema?: SchemaElement;
+  schema: SchemaElement;
 };
