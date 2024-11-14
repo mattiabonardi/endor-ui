@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { BooleanValue, StringValue } from "./declarations/value";
+import { BooleanValue, StringValue, Value } from "./declarations/value";
 import EndorTextfield from "./components/textfield/en-textfield";
-import EndorCheckbox from "./components/en-checkbox.ts/en-checkbox";
+import EndorCheckbox from "./components/checkbox/en-checkbox";
+import EndorField from "./components/field/en-field";
+import { FieldShapes } from "./declarations/schema";
 
 function App() {
   const [payload, setPayload] = useState<{
     textfieldValue: StringValue;
     checkboxValue: BooleanValue;
+    fieldValue: Value;
   }>({
     textfieldValue: "",
     checkboxValue: false,
+    fieldValue: "",
   });
 
   // Update textfield value
@@ -28,6 +32,14 @@ function App() {
     }));
   };
 
+  // Update field value
+  const handleFieldChange = (value: Value) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      fieldValue: value,
+    }));
+  };
+
   return (
     <>
       <h1>Endor UI</h1>
@@ -39,8 +51,14 @@ function App() {
         value={payload.checkboxValue}
         onChange={handleCheckboxChange}
       />
-      <p>{payload.textfieldValue}</p>
-      <p>{payload.checkboxValue ? "true" : "false"}</p>
+      <EndorField
+        schema={{ type: "String", shape: FieldShapes.TEXTFIELD }}
+        value={payload.fieldValue}
+        onChange={handleFieldChange}
+      />
+      <p>TEXTFIELD MODEL: {payload.textfieldValue}</p>
+      <p>CHECKBOX MODEL: {payload.checkboxValue ? "true" : "false"}</p>
+      <p>FIELD MODEL: {payload.fieldValue.toString()}</p>
     </>
   );
 }

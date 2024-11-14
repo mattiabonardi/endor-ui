@@ -6,6 +6,7 @@ export type EndorModelSchema = {
 
 export type SchemaElement = {
   type: SchemaValueType;
+  shape: FieldShapes;
   attributes?: {
     [key: string]: SchemaElement;
   };
@@ -20,3 +21,8 @@ export type SchemaValueType =
   | "NumberArray"
   | "BooleanArray"
   | "ObjectArray";
+
+export enum FieldShapes {
+  TEXTFIELD,
+  CHECKBOX,
+}

@@ -1,7 +1,7 @@
 import { StringValue } from "../../declarations/value";
-import { EndorFieldProp } from "../field/en-field-declaration";
+import { AbstractEndorFieldProps } from "../field/en-field-declaration";
 
-export interface EndorTextfieldProps extends EndorFieldProp {
+export interface EndorTextfieldProps extends AbstractEndorFieldProps {
   // binding
   value: StringValue;
   onChange: (value: StringValue) => void;
