@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   BooleanValue,
   ObjectValue,
+  StringArrayValue,
   StringValue,
   Value,
 } from "./declarations/value";
@@ -10,16 +11,19 @@ import EndorCheckbox from "./components/checkbox/en-checkbox";
 import EndorField from "./components/field/en-field";
 import { FieldShapes } from "./declarations/schema";
 import EndorForm from "./components/form/en-form";
+import EndorTextfieldMultipleValues from "./components/textfield-multiple-values.tsx/en.textfield-multiple-values";
 
 function App() {
   const [payload, setPayload] = useState<{
     textfieldValue: StringValue;
     checkboxValue: BooleanValue;
+    textfieldMultipleValues: StringArrayValue;
     fieldValue: Value;
     formValue: ObjectValue;
   }>({
     textfieldValue: "",
     checkboxValue: false,
+    textfieldMultipleValues: [],
     fieldValue: "",
     formValue: {
       formTextFieldValue: "",
@@ -32,6 +36,14 @@ function App() {
     setPayload((prevPayload) => ({
       ...prevPayload,
       textfieldValue: value,
+    }));
+  };
+
+  // Update textfield value
+  const handleTextfieldMultipleValuesChange = (value: StringArrayValue) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      textfieldMultipleValues: value,
     }));
   };
 
@@ -82,6 +94,16 @@ function App() {
         onChange={handleCheckboxChange}
       />
       <br />
+      <p>Textfield multiple values</p>
+      <EndorTextfieldMultipleValues
+        schema={{
+          type: "StringArray",
+          shape: FieldShapes.TEXTFIELD_MULTIPLE_VALUES,
+        }}
+        value={payload.textfieldMultipleValues}
+        onChange={handleTextfieldMultipleValuesChange}
+      />
+      <br />
       <p>Field</p>
       <EndorField
         schema={{ type: "String", shape: FieldShapes.TEXTFIELD }}
@@ -110,6 +132,10 @@ function App() {
       />
       <p>TEXTFIELD MODEL: {payload.textfieldValue}</p>
       <p>CHECKBOX MODEL: {payload.checkboxValue ? "true" : "false"}</p>
+      <p>
+        TEXTFIELD MULTIPLE VALUES MODEL:{" "}
+        {payload.textfieldMultipleValues.map((e) => e + ", ")}
+      </p>
       <p>FIELD MODEL: {payload.fieldValue.toString()}</p>
       <p>
         FORM MODEL: {payload.formValue ? JSON.stringify(payload.formValue) : ""}
