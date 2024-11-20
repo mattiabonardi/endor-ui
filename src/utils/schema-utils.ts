@@ -15,15 +15,6 @@ export const isStringType = (type: DataSchemaTypeName): boolean => {
 };
 
 /**
- * Check that the instance of DataSchemaTypeName is integer
- * @param value
- * @returns
- */
-export const isIntegerType = (type: DataSchemaTypeName): boolean => {
-  return type === "integer";
-};
-
-/**
  * Check that the instance of DataSchemaType is number
  * @param value
  * @returns

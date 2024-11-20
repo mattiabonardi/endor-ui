@@ -3,7 +3,7 @@ import { isObject } from "../../utils/schema-utils";
 import EndorField from "../field/en-field";
 import { EndorFormProps } from "./en-form-declaration";
 
-const EndorForm: React.FC<EndorFormProps> = (props) => {
+function EndorForm<T extends DataSchemaTypeObject>(props: EndorFormProps<T>) {
   if (!isObject(props.value)) {
     window.alert(`Type not supported for TEXTFIELD`);
     return;
@@ -16,15 +16,15 @@ const EndorForm: React.FC<EndorFormProps> = (props) => {
         }}
         value={props.value[key]}
         onChange={(v) => {
-          const updatedValue: DataSchemaTypeObject = {
+          const updatedValue: T = {
             ...props.value,
+            [key]: v,
           };
-          updatedValue[key] = v;
           props.onChange(updatedValue);
         }}
       />
     ));
   }
-};
+}
 
 export default EndorForm;

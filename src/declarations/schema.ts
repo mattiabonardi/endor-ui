@@ -32,7 +32,7 @@ export type DataSchemaTypeObject = {
   [key: string]: DataSchemaType;
 };
 
-export type DataSchemaTypeArray = Array<DataSchemaType>;
+export type DataSchemaTypeArray = DataSchemaType[];
 
 export enum FieldShapes {
   TEXTFIELD,

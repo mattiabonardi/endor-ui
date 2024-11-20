@@ -1,13 +1,13 @@
 import { useState } from "react";
 import EndorForm from "../../../components/form/en-form";
 
-interface Account {
+type Account = {
   username: string;
   firstName: string;
   lastName: string;
   isActive: boolean;
   roles: string[];
-}
+};
 
 const EnFormBasePage: React.FC = () => {
   const [account, setAccount] = useState<Account>({
@@ -21,7 +21,7 @@ const EnFormBasePage: React.FC = () => {
   return (
     <>
       <h1>Base Form</h1>
-      <EndorForm
+      <EndorForm<Account>
         schema={{
           type: "object",
           properties: {
@@ -42,7 +42,6 @@ const EnFormBasePage: React.FC = () => {
             },
           },
         }}
-        //TODO. fix type
         value={account}
         onChange={(e) => setAccount(e)}
       />
