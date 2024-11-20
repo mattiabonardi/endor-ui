@@ -1,5 +1,5 @@
-import { ObjectValue } from "../../declarations/value";
-import { isObject } from "../../utils/value-utils";
+import { DataSchemaTypeObject } from "../../declarations/schema";
+import { isObject } from "../../utils/schema-utils";
 import EndorField from "../field/en-field";
 import { EndorFormProps } from "./en-form-declaration";
 
@@ -8,16 +8,15 @@ const EndorForm: React.FC<EndorFormProps> = (props) => {
     window.alert(`Type not supported for TEXTFIELD`);
     return;
   }
-  if (props.schema.attributes) {
-    return Object.entries(props.schema.attributes).map(([key, value]) => (
+  if (props.schema.properties) {
+    return Object.entries(props.schema.properties).map(([key, value]) => (
       <EndorField
         schema={{
           type: value.type,
-          shape: value.shape,
         }}
         value={props.value[key]}
         onChange={(v) => {
-          const updatedValue: ObjectValue = {
+          const updatedValue: DataSchemaTypeObject = {
             ...props.value,
           };
           updatedValue[key] = v;

@@ -5,7 +5,7 @@ import {
   isNumber,
   isObject,
   isString,
-} from "../../src/utils/value-utils";
+} from "../../src/utils/schema-utils";
 
 test("is string test", () => {
   expect(isString("Hello World")).toBe(true);

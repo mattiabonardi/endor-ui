@@ -1,15 +1,12 @@
-import { SchemaElement } from "../../declarations/schema";
-import { Value } from "../../declarations/value";
+import { DataSchemaElement, DataSchemaType } from "../../declarations/schema";
 
 export interface EndorFieldProps extends AbstractEndorFieldProps {
-  // schema
-  schema: SchemaElement;
   // binding
-  value: Value;
-  onChange: (value: Value) => void;
+  value: DataSchemaType;
+  onChange: (value: DataSchemaType) => void;
 }
 
 export type AbstractEndorFieldProps = {
   // schema
-  schema: SchemaElement;
+  schema: DataSchemaElement;
 };

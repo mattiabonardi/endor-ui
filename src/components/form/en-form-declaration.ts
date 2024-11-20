@@ -1,8 +1,8 @@
-import { ObjectValue } from "../../declarations/value";
+import { DataSchemaTypeObject } from "../../declarations/schema";
 import { AbstractEndorFieldProps } from "../field/en-field-declaration";
 
 export interface EndorFormProps extends AbstractEndorFieldProps {
   // binding
-  value: ObjectValue;
-  onChange: (value: ObjectValue) => void;
+  value: DataSchemaTypeObject;
+  onChange: (value: DataSchemaTypeObject) => void;
 }

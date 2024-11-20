@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { EndorTextfieldMultipleValuesProps } from "./en-textfield-multiple-values-declaration";
+import { DataSchemaType, DataSchemaTypeArray } from "../../declarations/schema";
 
 const EndorTextfieldMultipleValues: React.FC<
   EndorTextfieldMultipleValuesProps
@@ -8,13 +9,13 @@ const EndorTextfieldMultipleValues: React.FC<
   const [inputValue, setInputValue] = useState("");
 
   // State to store the array of chips
-  const [chips, setChips] = useState<string[]>(props.value);
+  const [chips, setChips] = useState<DataSchemaTypeArray>(props.value);
 
   // Handle adding a chip on Enter key press
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === "Enter" && inputValue.trim()) {
       if (!chips.includes(inputValue.trim())) {
-        const values: string[] = [...chips, inputValue.trim()];
+        const values: DataSchemaTypeArray = [...chips, inputValue.trim()];
 
         setChips(values);
         // call on change
@@ -26,8 +27,10 @@ const EndorTextfieldMultipleValues: React.FC<
   };
 
   // Handle removing a chip
-  const handleRemoveChip = (chipToRemove: string) => {
-    const values: string[] = chips.filter((chip) => chip !== chipToRemove);
+  const handleRemoveChip = (chipToRemove: DataSchemaType) => {
+    const values: DataSchemaTypeArray = chips.filter(
+      (chip) => chip !== chipToRemove
+    );
     setChips(values);
     // call on change
     props.onChange(values);
@@ -38,7 +41,7 @@ const EndorTextfieldMultipleValues: React.FC<
       <div style={styles.chipContainer}>
         {chips.map((chip, index) => (
           <div key={index} style={styles.chip}>
-            {chip}
+            {chip as string}
             <span
               style={styles.closeButton}
               onClick={() => handleRemoveChip(chip)}
