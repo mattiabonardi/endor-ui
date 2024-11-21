@@ -1,0 +1,17 @@
+.form-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.form-field {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-field-label {
+    padding: 0;
+    margin: 0;
+}

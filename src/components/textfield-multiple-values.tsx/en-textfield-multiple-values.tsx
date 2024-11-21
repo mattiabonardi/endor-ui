@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { EndorTextfieldMultipleValuesProps } from "./en-textfield-multiple-values-declaration";
 import { DataSchemaType, DataSchemaTypeArray } from "../../declarations/schema";
+import "./en-textfield-multiple-values.css";
 
 const EndorTextfieldMultipleValues: React.FC<
   EndorTextfieldMultipleValuesProps
@@ -37,68 +38,29 @@ const EndorTextfieldMultipleValues: React.FC<
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.chipContainer}>
+    <div className="field-container">
+      <div className="chips-container">
         {chips.map((chip, index) => (
-          <div key={index} style={styles.chip}>
+          <div key={index} className="chip">
             {chip as string}
             <span
-              style={styles.closeButton}
+              className="close-button"
               onClick={() => handleRemoveChip(chip)}
             >
               &times;
             </span>
           </div>
         ))}
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type and press Enter"
-          style={styles.input}
-        />
       </div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Type and press Enter"
+      />
     </div>
   );
-};
-
-// Styles for the component
-const styles: {
-  [cssName: string]: React.CSSProperties;
-} = {
-  container: {
-    fontFamily: "Arial, sans-serif",
-    padding: "10px",
-    width: "100%",
-    maxWidth: "400px",
-  },
-  chipContainer: {
-    display: "flex",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    padding: "5px",
-  },
-  chip: {
-    display: "flex",
-    alignItems: "center",
-    backgroundColor: "#e0e0e0",
-    borderRadius: "16px",
-    padding: "5px 10px",
-    margin: "5px",
-    fontSize: "14px",
-  },
-  closeButton: {
-    marginLeft: "8px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-  input: {
-    flex: 1,
-    border: "none",
-    outline: "none",
-    minWidth: "50px",
-  },
 };
 
 export default EndorTextfieldMultipleValues;

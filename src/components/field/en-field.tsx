@@ -10,7 +10,7 @@ import {
 } from "../../utils/schema-utils";
 import EndorCheckbox from "../checkbox/en-checkbox";
 import EndorForm from "../form/en-form";
-import EndorTextfieldMultipleValues from "../textfield-multiple-values.tsx/en.textfield-multiple-values";
+import EndorTextfieldMultipleValues from "../textfield-multiple-values.tsx/en-textfield-multiple-values";
 import EndorTextfield from "../textfield/en-textfield";
 import { EndorFieldProps } from "./en-field-declaration";
 

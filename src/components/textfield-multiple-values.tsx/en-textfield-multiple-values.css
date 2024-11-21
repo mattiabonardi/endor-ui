@@ -1,0 +1,25 @@
+.field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.chips-container {
+    display: flex;
+    gap: 5px;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 16px;
+    padding: 7px;
+}
+
+
+.close-button {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
