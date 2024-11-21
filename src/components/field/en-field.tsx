@@ -15,39 +15,39 @@ import EndorTextfield from "../textfield/en-textfield";
 import { EndorFieldProps } from "./en-field-declaration";
 
 const EndorField: React.FC<EndorFieldProps> = (props) => {
-  if (isStringType(props.schema.type) && isString(props.value)) {
+  if (isStringType(props.schema.type)) {
     return (
       <EndorTextfield
         schema={props.schema}
-        value={props.value}
+        value={isString(props.value) ? props.value : undefined}
         onChange={(v) => {
           props.onChange(v);
         }}
       />
     );
-  } else if (isBooleanType(props.schema.type) && isBoolean(props.value)) {
+  } else if (isBooleanType(props.schema.type)) {
     return (
       <EndorCheckbox
         schema={props.schema}
-        value={props.value}
+        value={isBoolean(props.value) ? props.value : undefined}
         onChange={(v) => {
           props.onChange(v);
         }}
       />
     );
-  } else if (isObjectType(props.schema.type) && isObject(props.value)) {
+  } else if (isObjectType(props.schema.type)) {
     <EndorForm
       schema={props.schema}
-      value={props.value}
+      value={isObject(props.value) ? props.value : undefined}
       onChange={(v) => {
         props.onChange(v);
       }}
     />;
-  } else if (isArrayType(props.schema.type) && isArray(props.value)) {
+  } else if (isArrayType(props.schema.type)) {
     return (
       <EndorTextfieldMultipleValues
         schema={props.schema}
-        value={props.value}
+        value={isArray(props.value) ? props.value : undefined}
         onChange={(v) => {
           props.onChange(v);
         }}

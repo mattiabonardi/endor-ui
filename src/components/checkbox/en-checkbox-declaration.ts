@@ -2,6 +2,6 @@ import { AbstractEndorFieldProps } from "../field/en-field-declaration";
 
 export interface EndorCheckboxProps extends AbstractEndorFieldProps {
   // binding
-  value: boolean;
+  value: boolean | undefined;
   onChange: (value: boolean) => void;
 }

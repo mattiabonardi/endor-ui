@@ -4,6 +4,6 @@ import { AbstractEndorFieldProps } from "../field/en-field-declaration";
 export interface EndorFormProps<T extends DataSchemaTypeObject>
   extends AbstractEndorFieldProps {
   // binding
-  value: T;
+  value: T | undefined;
   onChange: (value: T) => void;
 }

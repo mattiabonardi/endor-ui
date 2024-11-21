@@ -22,6 +22,7 @@ export type DataSchemaTypeName =
   | "array";
 
 export type DataSchemaType =
+  | undefined
   | string
   | number
   | boolean
@@ -33,10 +34,3 @@ export type DataSchemaTypeObject = {
 };
 
 export type DataSchemaTypeArray = DataSchemaType[];
-
-export enum FieldShapes {
-  TEXTFIELD,
-  TEXTFIELD_MULTIPLE_VALUES,
-  CHECKBOX,
-  OBJECT,
-}

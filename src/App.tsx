@@ -3,6 +3,7 @@ import ComponentsPage from "./pages/components";
 import EnFormPage from "./pages/components/en-form";
 import EnFormBasePage from "./pages/components/en-form/base";
 import IndexPage from "./pages";
+import EnFormInitialValuesPage from "./pages/components/en-form/initial-values";
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
         <Route path="/components" element={<ComponentsPage />} />
         <Route path="/components/en-form" element={<EnFormPage />} />
         <Route path="/components/en-form/base" element={<EnFormBasePage />} />
+        <Route
+          path="/components/en-form/initial-values"
+          element={<EnFormInitialValuesPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

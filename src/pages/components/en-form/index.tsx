@@ -7,6 +7,9 @@ const EnFormPage: React.FC = () => {
         <li>
           <Link to="base">Base Form</Link>
         </li>
+        <li>
+          <Link to="initial-values">Form with initial values</Link>
+        </li>
       </ul>
     </nav>
   );

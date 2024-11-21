@@ -9,12 +9,18 @@ type Account = {
   roles: string[];
 };
 
-const EnFormBasePage: React.FC = () => {
-  const [account, setAccount] = useState<Account>();
+const EnFormInitialValuesPage: React.FC = () => {
+  const [account, setAccount] = useState<Account>({
+    username: "mattiabonardi",
+    firstName: "Mattia",
+    lastName: "Bonardi",
+    isActive: true,
+    roles: ["admin", "developer"],
+  });
 
   return (
     <>
-      <h1>Base Form</h1>
+      <h1>Form with initial values</h1>
       <EndorForm<Account>
         schema={{
           type: "object",
@@ -44,4 +50,4 @@ const EnFormBasePage: React.FC = () => {
   );
 };
 
-export default EnFormBasePage;
+export default EnFormInitialValuesPage;

@@ -9,7 +9,7 @@ const EndorTextfieldMultipleValues: React.FC<
   const [inputValue, setInputValue] = useState("");
 
   // State to store the array of chips
-  const [chips, setChips] = useState<DataSchemaTypeArray>(props.value);
+  const [chips, setChips] = useState<DataSchemaTypeArray>(props.value ?? []);
 
   // Handle adding a chip on Enter key press
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
