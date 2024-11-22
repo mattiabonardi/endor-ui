@@ -4,6 +4,6 @@ import {
 import { AbstractEndorFieldProps } from "../field/en-field-declaration";
 
 export interface EndorTableProps extends AbstractEndorFieldProps {
-  value: DataSchemaTypeArray;
+  value: DataSchemaTypeArray | undefined;
   onChange: (value: DataSchemaTypeArray) => void;
 }
