@@ -29,8 +29,9 @@ export type DataSchemaType =
   | DataSchemaTypeObject
   | DataSchemaTypeArray;
 
-export type DataSchemaTypeObject = {
+export interface DataSchemaTypeObject {
   [key: string]: DataSchemaType;
-};
+}
 
-export type DataSchemaTypeArray = DataSchemaType[];
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface DataSchemaTypeArray extends Array<DataSchemaType> {}

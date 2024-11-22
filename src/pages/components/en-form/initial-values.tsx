@@ -7,6 +7,10 @@ type Account = {
   lastName: string;
   isActive: boolean;
   roles: string[];
+  paymentMethods: {
+    cardNumber: string;
+    isActive: boolean;
+  }[];
 };
 
 const EnFormInitialValuesPage: React.FC = () => {
@@ -16,6 +20,16 @@ const EnFormInitialValuesPage: React.FC = () => {
     lastName: "Bonardi",
     isActive: true,
     roles: ["admin", "developer"],
+    paymentMethods: [
+      {
+        cardNumber: "aaaabbbbccccdddd",
+        isActive: true,
+      },
+      {
+        cardNumber: "zzzzxxxxwwwwvvvv",
+        isActive: false,
+      },
+    ],
   });
 
   return (
@@ -39,6 +53,20 @@ const EnFormInitialValuesPage: React.FC = () => {
             },
             roles: {
               type: "array",
+            },
+            paymentMethods: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  cardNumber: {
+                    type: "string",
+                  },
+                  isActive: {
+                    type: "boolean",
+                  },
+                },
+              },
             },
           },
         }}

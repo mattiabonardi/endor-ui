@@ -10,6 +10,7 @@ import {
 } from "../../utils/schema-utils";
 import EndorCheckbox from "../checkbox/en-checkbox";
 import EndorForm from "../form/en-form";
+import EndorTable from "../table/en-table";
 import EndorTextfieldMultipleValues from "../textfield-multiple-values.tsx/en-textfield-multiple-values";
 import EndorTextfield from "../textfield/en-textfield";
 import { EndorFieldProps } from "./en-field-declaration";
@@ -44,15 +45,25 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
       }}
     />;
   } else if (isArrayType(props.schema.type)) {
-    return (
-      <EndorTextfieldMultipleValues
-        schema={props.schema}
-        value={isArray(props.value) ? props.value : undefined}
-        onChange={(v) => {
-          props.onChange(v);
-        }}
-      />
-    );
+    if (props.schema.items?.type && isObjectType(props.schema.items.type)) {
+      return (
+        <EndorTable
+          schema={props.schema}
+          value={isArray(props.value) ? props.value : []}
+          onChange={(v) => props.onChange(v)}
+        />
+      );
+    } else {
+      return (
+        <EndorTextfieldMultipleValues
+          schema={props.schema}
+          value={isArray(props.value) ? props.value : undefined}
+          onChange={(v) => {
+            props.onChange(v);
+          }}
+        />
+      );
+    }
   } else {
     window.alert(`Type not supported`);
   }
