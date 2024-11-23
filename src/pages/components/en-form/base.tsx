@@ -9,6 +9,7 @@ const EnFormBasePage: React.FC = () => {
     <>
       <h1>Base Form</h1>
       <EndorForm<Account>
+        fieldId="account"
         schema={accountSchema}
         value={account}
         onChange={(e) => setAccount(e)}

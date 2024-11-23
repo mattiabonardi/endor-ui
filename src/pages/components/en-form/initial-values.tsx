@@ -25,6 +25,7 @@ const EnFormInitialValuesPage: React.FC = () => {
     <>
       <h1>Form with initial values</h1>
       <EndorForm<Account>
+        fieldId="account"
         schema={accountSchema}
         value={account}
         onChange={(e) => setAccount(e)}

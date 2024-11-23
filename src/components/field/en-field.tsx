@@ -19,48 +19,50 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
   if (isStringType(props.schema.type)) {
     return (
       <EndorTextfield
+        fieldId={props.fieldId}
         schema={props.schema}
         value={isString(props.value) ? props.value : undefined}
-        onChange={(v) => {
-          props.onChange(v);
-        }}
+        onChange={props.onChange}
+        onFocus={props.onFocus}
       />
     );
   } else if (isBooleanType(props.schema.type)) {
     return (
       <EndorCheckbox
+        fieldId={props.fieldId}
         schema={props.schema}
         value={isBoolean(props.value) ? props.value : undefined}
-        onChange={(v) => {
-          props.onChange(v);
-        }}
+        onChange={props.onChange}
+        onFocus={props.onFocus}
       />
     );
   } else if (isObjectType(props.schema.type)) {
     <EndorForm
+      fieldId={props.fieldId}
       schema={props.schema}
       value={isObject(props.value) ? props.value : undefined}
-      onChange={(v) => {
-        props.onChange(v);
-      }}
+      onChange={props.onChange}
+      onFocus={props.onFocus}
     />;
   } else if (isArrayType(props.schema.type)) {
     if (props.schema.items?.type && isObjectType(props.schema.items.type)) {
       return (
         <EndorTable
+          fieldId={props.fieldId}
           schema={props.schema}
           value={isArray(props.value) ? props.value : []}
-          onChange={(v) => props.onChange(v)}
+          onChange={props.onChange}
+          onFocus={props.onFocus}
         />
       );
     } else {
       return (
         <EndorTextfieldMultipleValues
+          fieldId={props.fieldId}
           schema={props.schema}
           value={isArray(props.value) ? props.value : undefined}
-          onChange={(v) => {
-            props.onChange(v);
-          }}
+          onChange={props.onChange}
+          onFocus={props.onFocus}
         />
       );
     }

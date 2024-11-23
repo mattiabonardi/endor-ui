@@ -9,4 +9,9 @@ export interface EndorFieldProps extends AbstractEndorFieldProps {
 export type AbstractEndorFieldProps = {
   // schema
   schema: DataSchemaElement;
+  // input id
+  fieldId: string;
+
+  // commons events
+  onFocus?: (fieldId: string) => void;
 };

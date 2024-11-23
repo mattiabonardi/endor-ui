@@ -54,6 +54,7 @@ const EndorTextfieldMultipleValues: React.FC<
       </div>
       <input
         type="text"
+        id={props.fieldId}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
