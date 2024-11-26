@@ -2,15 +2,15 @@ import { useState } from "react";
 import { isObject } from "../../utils/schema-utils";
 import EndorField from "../field/en-field";
 import { EndorTableProps } from "./en-table-declaration";
-import { DataSchemaType, DataSchemaTypeArray } from "../../declarations/schema";
+import { DataSchemaType } from "../../declarations/schema";
 import { assignId } from "../../utils/generic-utils";
 import EndorCheckbox from "../checkbox/en-checkbox";
 import EndorButton from "../button/en-button";
 
 const EndorTable: React.FC<EndorTableProps> = (props) => {
-  const [rows, setRows] = useState<DataSchemaTypeArray>(props.value ?? []);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const columns = props.schema.items?.properties;
+  const rows = props.value ? props.value : [];
   const newRowIndex = rows.length;
 
   const updateCell = (value: DataSchemaType, key: string, rowId: number) => {
@@ -22,7 +22,6 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
         updatedValues[rowId][key] = value;
       }
     }
-    setRows(updatedValues);
     props.onChange?.(updatedValues);
   };
 
@@ -34,12 +33,16 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
   const toggleRowSelection = (select: boolean, rowId: number) => {
     if (select) {
       setSelectedRows((rows) => {
-        rows.push(rowId);
-        return rows;
+        const updatedRows = [...rows];
+        if (!rows.includes(rowId)) {
+          updatedRows.push(rowId);
+        }
+        return updatedRows;
       });
     } else {
       setSelectedRows((rows) => {
-        return rows.filter((id) => id !== rowId);
+        const updatedRows = [...rows];
+        return updatedRows.filter((id) => id !== rowId);
       });
     }
   };
@@ -56,7 +59,6 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
       }
     });
     setSelectedRows([]);
-    setRows(updatedValues);
     props.onChange?.(updatedValues);
   };
 
@@ -80,13 +82,12 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
                 "selectable",
                 rowIndex
               );
-              // Ensure `row` is an object
               if (isObject(row)) {
                 return (
                   <tr key={rowIndex}>
                     <td key={selectableCellId}>
                       <EndorCheckbox
-                        value={false}
+                        value={selectedRows.includes(rowIndex)}
                         onChange={(v: boolean) =>
                           toggleRowSelection(v, rowIndex)
                         }

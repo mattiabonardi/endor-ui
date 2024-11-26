@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { EndorTextfieldProps } from "./en-textfield-declaration";
 
 const EndorTextfield: React.FC<EndorTextfieldProps> = (props) => {
-  const [value, setValue] = useState(props.value ?? "");
-
   const onChange = (value: string) => {
-    setValue(value);
     props.onChange(value);
   };
 
@@ -13,7 +9,7 @@ const EndorTextfield: React.FC<EndorTextfieldProps> = (props) => {
     <input
       type="text"
       id={props.fieldId}
-      value={value}
+      value={props.value}
       onChange={(event) => {
         onChange(event.target.value);
       }}

@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { EndorCheckboxProps } from "./en-checkbox-declaration";
 
 const EndorCheckbox: React.FC<EndorCheckboxProps> = (props) => {
-  const [checked, setChecked] = useState<boolean>(props.value ?? false);
-
   const onChange = (checked: boolean) => {
-    setChecked(checked);
     props.onChange(checked);
   };
 
@@ -13,7 +9,7 @@ const EndorCheckbox: React.FC<EndorCheckboxProps> = (props) => {
     <input
       type="checkbox"
       id={props.fieldId}
-      checked={checked}
+      checked={props.value ? true : false}
       onChange={(event) => {
         onChange(event.target.checked);
       }}
