@@ -46,3 +46,40 @@ export const accountSchema: DataSchema = {
     },
   },
 };
+
+export const accountSchemaWithRequiredFields: DataSchema = {
+  type: "object",
+  properties: {
+    username: {
+      type: "string",
+    },
+    firstName: {
+      type: "string",
+    },
+    lastName: {
+      type: "string",
+    },
+    isActive: {
+      type: "boolean",
+    },
+    roles: {
+      type: "array",
+    },
+    paymentMethods: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          cardNumber: {
+            type: "string",
+          },
+          isActive: {
+            type: "boolean",
+          },
+        },
+        required: ["cardNumber", "isActive"],
+      },
+    },
+  },
+  required: ["username", "isActive", "roles"],
+};

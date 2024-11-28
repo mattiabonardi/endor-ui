@@ -12,6 +12,10 @@ export type DataSchemaElement = {
    * Array items
    */
   items?: DataSchemaElement;
+  /**
+   * Required fields
+   */
+  required?: string[];
 };
 
 export type DataSchemaTypeName =

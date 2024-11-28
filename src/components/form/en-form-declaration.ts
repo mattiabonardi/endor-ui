@@ -6,4 +6,5 @@ export interface EndorFormProps<T extends DataSchemaTypeObject>
   // binding
   value: T | undefined;
   onChange: (value: T) => void;
+  onSubmit?: () => void;
 }

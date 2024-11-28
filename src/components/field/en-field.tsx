@@ -22,6 +22,7 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
         fieldId={props.fieldId}
         schema={props.schema}
         value={isString(props.value) ? props.value : undefined}
+        error={props.error}
         onChange={props.onChange}
         onFocus={props.onFocus}
       />

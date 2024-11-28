@@ -10,6 +10,9 @@ const EnFormPage: React.FC = () => {
         <li>
           <Link to="initial-values">Form with initial values</Link>
         </li>
+        <li>
+          <Link to="required-fields">Form with required fields</Link>
+        </li>
       </ul>
     </nav>
   );

@@ -12,6 +12,9 @@ export type AbstractEndorFieldProps = {
   // input id
   fieldId: string;
 
+  // error
+  error?: boolean;
+
   // commons events
   onFocus?: (fieldId: string) => void;
 };
