@@ -6,8 +6,6 @@ const EndorTextfield: React.FC<EndorTextfieldProps> = (props) => {
     props.onChange(value);
   };
 
-  console.log("TEXTFELD", props)
-
   return (
     <div>
       <input

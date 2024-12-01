@@ -83,3 +83,35 @@ export const accountSchemaWithRequiredFields: DataSchema = {
   },
   required: ["username", "isActive", "roles"],
 };
+
+export type AccountList = {
+  username: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+  roles: string[];
+}[];
+
+export const accountListSchema: DataSchema = {
+  type: "array",
+  items: {
+    type: "object",
+    properties: {
+      username: {
+        type: "string",
+      },
+      firstName: {
+        type: "string",
+      },
+      lastName: {
+        type: "string",
+      },
+      isActive: {
+        type: "boolean",
+      },
+      roles: {
+        type: "array",
+      },
+    },
+  },
+};

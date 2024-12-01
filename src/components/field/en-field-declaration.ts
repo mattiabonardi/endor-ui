@@ -6,9 +6,14 @@ export interface EndorFieldProps extends AbstractEndorFieldProps {
   onChange: (value: DataSchemaType) => void;
 }
 
+export interface EndorStringFieldProps extends AbstractEndorFieldProps {
+  value: string | undefined;
+}
+
 export type AbstractEndorFieldProps = {
   // schema
   schema: DataSchemaElement;
+
   // input id
   fieldId: string;
 

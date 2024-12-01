@@ -12,6 +12,7 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
   const columns = props.schema.items?.properties;
   const rows = props.value ? props.value : [];
   const newRowIndex = rows.length;
+  const editable = props.schema.uiProperties?.editable ?? false;
 
   const updateCell = (value: DataSchemaType, key: string, rowId: number) => {
     const updatedValues = [...rows];
@@ -65,11 +66,12 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
   if (columns) {
     return (
       <div>
-        <EndorButton value="delete" onClick={deleteRows} />
+        {/* delete button */}
+        {editable && <EndorButton value="delete" onClick={deleteRows} />}
         <table border={1}>
           <thead>
             <tr>
-              <th key="selectable-column"></th>
+              {editable && <th key="selectable-column"></th>}
               {Object.keys(columns).map((columnName, index) => (
                 <th key={index}>{columnName}</th>
               ))}
@@ -85,20 +87,30 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
               if (isObject(row)) {
                 return (
                   <tr key={rowIndex}>
-                    <td key={selectableCellId}>
-                      <EndorCheckbox
-                        value={selectedRows.includes(rowIndex)}
-                        onChange={(v: boolean) =>
-                          toggleRowSelection(v, rowIndex)
-                        }
-                        schema={{
-                          type: "boolean",
-                        }}
-                        fieldId={selectableCellId}
-                      />
-                    </td>
-                    {Object.entries(columns).map(([key, schema], colIndex) => {
+                    {editable && (
+                      <td key={selectableCellId}>
+                        <EndorCheckbox
+                          value={selectedRows.includes(rowIndex)}
+                          onChange={(v: boolean) =>
+                            toggleRowSelection(v, rowIndex)
+                          }
+                          schema={{
+                            type: "boolean",
+                          }}
+                          fieldId={selectableCellId}
+                        />
+                      </td>
+                    )}
+                    {Object.entries(columns).map(([key, value], colIndex) => {
                       const fieldId = assignId(props.fieldId, key, rowIndex);
+                      const schema = { ...value };
+                      if (props.schema.uiProperties?.editable) {
+                        // set editable by default
+                        schema.uiProperties = {
+                          ...schema.uiProperties,
+                          editable: true,
+                        };
+                      }
                       return (
                         <td key={`${rowIndex}_${colIndex}`}>
                           <EndorField
@@ -118,28 +130,38 @@ const EndorTable: React.FC<EndorTableProps> = (props) => {
               return null;
             })}
             {/* New line for adding a new row */}
-            <tr key={newRowIndex}>
-              <td></td>
-              {Object.entries(columns).map(([key, schema], colIndex) => {
-                const fieldId = assignId(props.fieldId, key, newRowIndex);
-                return (
-                  <td key={`${newRowIndex}_${colIndex}`}>
-                    <EndorField
-                      fieldId={fieldId}
-                      key={`${newRowIndex}_${colIndex}_field`}
-                      schema={schema}
-                      value={
-                        rows[newRowIndex] && isObject(rows[newRowIndex])
-                          ? rows[newRowIndex][key]
-                          : undefined
-                      }
-                      onChange={(v) => updateCell(v, key, newRowIndex)}
-                      onFocus={props.onFocus}
-                    />
-                  </td>
-                );
-              })}
-            </tr>
+            {editable && (
+              <tr key={newRowIndex}>
+                <td></td>
+                {Object.entries(columns).map(([key, value], colIndex) => {
+                  const fieldId = assignId(props.fieldId, key, newRowIndex);
+                  const schema = { ...value };
+                  if (props.schema.uiProperties?.editable) {
+                    // set editable by default
+                    schema.uiProperties = {
+                      ...schema.uiProperties,
+                      editable: true,
+                    };
+                  }
+                  return (
+                    <td key={`${newRowIndex}_${colIndex}`}>
+                      <EndorField
+                        fieldId={fieldId}
+                        key={`${newRowIndex}_${colIndex}_field`}
+                        schema={schema}
+                        value={
+                          rows[newRowIndex] && isObject(rows[newRowIndex])
+                            ? rows[newRowIndex][key]
+                            : undefined
+                        }
+                        onChange={(v) => updateCell(v, key, newRowIndex)}
+                        onFocus={props.onFocus}
+                      />
+                    </td>
+                  );
+                })}
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

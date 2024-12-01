@@ -3,6 +3,10 @@ export type DataSchema = DataSchemaElement;
 export type DataSchemaElement = {
   type: DataSchemaTypeName;
   /**
+   * Reference entity
+   */
+  referenceEntity?: string;
+  /**
    * Properties of schema
    */
   properties?: {
@@ -16,6 +20,12 @@ export type DataSchemaElement = {
    * Required fields
    */
   required?: string[];
+  /**
+   * UI schema
+   */
+  uiProperties?: {
+    editable?: boolean;
+  };
 };
 
 export type DataSchemaTypeName =

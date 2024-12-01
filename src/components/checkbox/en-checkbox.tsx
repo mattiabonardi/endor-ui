@@ -14,6 +14,7 @@ const EndorCheckbox: React.FC<EndorCheckboxProps> = (props) => {
         onChange(event.target.checked);
       }}
       onFocus={() => props.onFocus && props.onFocus(props.fieldId)}
+      disabled={props.disabled}
     />
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  DataSchemaElement,
   DataSchemaType,
   DataSchemaTypeObject,
 } from "../../declarations/schema";
@@ -36,35 +37,47 @@ function EndorForm<T extends DataSchemaTypeObject>(props: EndorFormProps<T>) {
   if (props.schema.properties) {
     return (
       <form id={props.fieldId} className="form-container">
-        {Object.entries(props.schema.properties).map(([key, schema], index) => (
-          <div key={index} className="form-field">
-            <p className="form-field-label">
-              {key}
-              {props.schema.required?.includes(key) ? "*" : ""}
-            </p>
-            <EndorField
-              fieldId={assignId(props.fieldId, key)}
-              schema={schema}
-              value={props.value?.[key]}
-              error={errorMap[key]}
-              onFocus={(fieldId) => setFocusedFieldId(fieldId)}
-              onChange={(v: DataSchemaType) => {
-                const updatedValue = {
-                  ...props.value,
-                  [key]: v,
-                } as T;
-                props.onChange(updatedValue);
+        {Object.entries(props.schema.properties).map(([key, value], index) => {
+          const schema: DataSchemaElement = {
+            ...value,
+          };
+          if (!schema.uiProperties?.editable) {
+            // set editable by default
+            schema.uiProperties = {
+              ...schema.uiProperties,
+              editable: true,
+            };
+          }
+          return (
+            <div key={index} className="form-field">
+              <p className="form-field-label">
+                {key}
+                {props.schema.required?.includes(key) ? "*" : ""}
+              </p>
+              <EndorField
+                fieldId={assignId(props.fieldId, key)}
+                schema={schema}
+                value={props.value?.[key]}
+                error={errorMap[key]}
+                onFocus={(fieldId) => setFocusedFieldId(fieldId)}
+                onChange={(v: DataSchemaType) => {
+                  const updatedValue = {
+                    ...props.value,
+                    [key]: v,
+                  } as T;
+                  props.onChange(updatedValue);
 
-                // restore focus deferred
-                setTimeout(() => {
-                  if (focusedFieldId) {
-                    document.getElementById(focusedFieldId)?.focus();
-                  }
-                }, 0);
-              }}
-            />
-          </div>
-        ))}
+                  // restore focus deferred
+                  setTimeout(() => {
+                    if (focusedFieldId) {
+                      document.getElementById(focusedFieldId)?.focus();
+                    }
+                  }, 0);
+                }}
+              />
+            </div>
+          );
+        })}
         <input
           type="button"
           value="Submit"

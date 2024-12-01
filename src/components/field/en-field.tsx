@@ -9,24 +9,36 @@ import {
   isStringType,
 } from "../../utils/schema-utils";
 import EndorCheckbox from "../checkbox/en-checkbox";
+import EndorChips from "../chips/en-chips";
 import EndorForm from "../form/en-form";
 import EndorTable from "../table/en-table";
 import EndorTextfieldMultipleValues from "../textfield-multiple-values.tsx/en-textfield-multiple-values";
 import EndorTextfield from "../textfield/en-textfield";
 import { EndorFieldProps } from "./en-field-declaration";
+import EndorStringField from "./en-string-field";
 
 const EndorField: React.FC<EndorFieldProps> = (props) => {
   if (isStringType(props.schema.type)) {
-    return (
-      <EndorTextfield
-        fieldId={props.fieldId}
-        schema={props.schema}
-        value={isString(props.value) ? props.value : undefined}
-        error={props.error}
-        onChange={props.onChange}
-        onFocus={props.onFocus}
-      />
-    );
+    if (props.schema.uiProperties?.editable) {
+      return (
+        <EndorTextfield
+          fieldId={props.fieldId}
+          schema={props.schema}
+          value={isString(props.value) ? props.value : undefined}
+          error={props.error}
+          onChange={props.onChange}
+          onFocus={props.onFocus}
+        />
+      );
+    } else {
+      return (
+        <EndorStringField
+          fieldId={props.fieldId}
+          schema={props.schema}
+          value={isString(props.value) ? props.value : undefined}
+        />
+      );
+    }
   } else if (isBooleanType(props.schema.type)) {
     return (
       <EndorCheckbox
@@ -35,6 +47,7 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
         value={isBoolean(props.value) ? props.value : undefined}
         onChange={props.onChange}
         onFocus={props.onFocus}
+        disabled={!props.schema.uiProperties?.editable}
       />
     );
   } else if (isObjectType(props.schema.type)) {
@@ -57,15 +70,25 @@ const EndorField: React.FC<EndorFieldProps> = (props) => {
         />
       );
     } else {
-      return (
-        <EndorTextfieldMultipleValues
-          fieldId={props.fieldId}
-          schema={props.schema}
-          value={isArray(props.value) ? props.value : undefined}
-          onChange={props.onChange}
-          onFocus={props.onFocus}
-        />
-      );
+      if (props.schema.uiProperties?.editable) {
+        return (
+          <EndorTextfieldMultipleValues
+            fieldId={props.fieldId}
+            schema={props.schema}
+            value={isArray(props.value) ? props.value : undefined}
+            onChange={props.onChange}
+            onFocus={props.onFocus}
+          />
+        );
+      } else {
+        return (
+          <EndorChips
+            value={isArray(props.value) ? props.value : []}
+            schema={props.schema}
+            fieldId={props.fieldId}
+          />
+        );
+      }
     }
   } else {
     window.alert(`Type not supported`);
