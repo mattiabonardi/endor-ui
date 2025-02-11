@@ -7,13 +7,19 @@ import EnFormInitialValuesPage from "./pages/components/en-form/initial-values";
 import EnFormRequiredFieldsPage from "./pages/components/en-form/required-fields";
 import EnTableBasePage from "./pages/components/en-table/base";
 import EnTablePage from "./pages/components/en-table";
+import Example1 from "./pages/examples/example1";
+import ExamplesPage from "./pages/examples";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<IndexPage />} />
+        <Route path="/examples" element={<ExamplesPage />} />
         <Route path="/components" element={<ComponentsPage />} />
+
+        {/* EXAMPLES */}
+        <Route path="/examples/example1" element={<Example1 />} />
 
         {/* FORM */}
         <Route path="/components/en-form" element={<EnFormPage />} />

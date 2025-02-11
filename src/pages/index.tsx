@@ -5,6 +5,9 @@ const IndexPage: React.FC = () => {
     <nav>
       <ul>
         <li>
+          <Link to="examples">Examples</Link>
+        </li>
+        <li>
           <Link to="components">Components</Link>
         </li>
       </ul>
