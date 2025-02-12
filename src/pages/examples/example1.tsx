@@ -7,7 +7,7 @@ const Example1: React.FC = () => {
       components={[
         {
           type: EndorComponentShapes.LABEL,
-          data: "Hello World",
+          rawData: "Hello World",
         },
       ]}
     />

@@ -5,10 +5,10 @@ import {
 import Label from "../label/label";
 
 const Section: React.FC<EndorSection> = (props) =>
-  props.components.map((component) => {
+  props.components.map((component, index) => {
     switch (component.type) {
       case EndorComponentShapes.LABEL:
-        return <Label {...component} />;
+        return <Label key={index} {...component} />;
     }
   });
 

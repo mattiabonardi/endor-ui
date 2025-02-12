@@ -6,11 +6,28 @@ export type EndorSection = {
 
 export type EndorComponent = {
   type: EndorComponentShapes;
-  data: DataSchemaType;
+  rawData?: DataSchemaType;
+  data?: DataSchemaType;
   schema?: DataSchema;
   id?: string;
+  triggers?: EndorTrigger[];
 };
 
 export enum EndorComponentShapes {
   LABEL,
 }
+
+export type EndorTrigger = {
+  targets: string[];
+  variables: {
+    [name: string]: EndorVariable;
+  };
+};
+
+export type EndorVariableMap = {
+  [name: string]: EndorVariable;
+};
+
+export type EndorVariable = {
+  value: string;
+};
