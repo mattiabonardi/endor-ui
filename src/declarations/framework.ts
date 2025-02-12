@@ -18,16 +18,24 @@ export enum EndorComponentShapes {
 }
 
 export type EndorTrigger = {
+  eventType: EndorTriggerEventType;
   targets: string[];
-  variables: {
-    [name: string]: EndorVariable;
-  };
-};
-
-export type EndorVariableMap = {
-  [name: string]: EndorVariable;
+  variables: EndorVariable[];
 };
 
 export type EndorVariable = {
+  key: string;
   value: string;
 };
+
+export type EndorVariableMap = {
+  [variableName: string]: DataSchemaType;
+};
+
+export enum EndorTriggerEventType {
+  CLICK,
+}
+
+export type EndorTriggerEvent = CustomEvent<{
+  variables: EndorVariableMap;
+}>;
